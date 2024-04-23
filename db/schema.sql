@@ -1,0 +1,2 @@
+DROP DATABASE IF EXISTS jwt_demo;
+CREATE DATABASE jwt_demo;
