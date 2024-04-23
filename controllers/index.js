@@ -12,7 +12,7 @@ router.get("/protected",(req,res)=>{
     console.log('==============================')
     console.log(token)
     try {
-        const tokenDecoded = jwt.verify(token,"secret");
+        const tokenDecoded = jwt.verify(token,process.env.JWT_SECRET);
         res.json({msg:"welcome to the club!",tokenDecoded})
     } catch (error) {
         res.status(403).json({msg:"invalid token"})

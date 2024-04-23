@@ -20,7 +20,15 @@ router.get("/", (req, res) => {
 router.post("/", (req, res) => {
   User.create(req.body)
     .then((data) => {
-      res.json(data);
+      const token = jwt.sign({
+        id:data.id,
+        username:data.username
+    },
+    process.env.JWT_SECRET,
+    {
+        expiresIn:"2h"
+    })
+      res.json({token,user:data});
     })
     .catch((err) => {
       console.log(err);
@@ -46,7 +54,7 @@ router.post("/login", (req, res) => {
             id:data.id,
             username:data.username
         },
-        "secret",
+        process.env.JWT_SECRET,
         {
             expiresIn:"2h"
         })
